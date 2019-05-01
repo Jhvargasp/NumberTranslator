@@ -11,17 +11,10 @@ import com.ibm.icu.util.ULocale;
 public class ICU4JTranslatorImpl implements Translator {
 
 	public String translateValue(int value) {
-		 ULocale locale = ULocale.forLocale(Locale.US);
-         RuleBasedNumberFormat formatter = new RuleBasedNumberFormat(locale, RuleBasedNumberFormat.SPELLOUT);
-		try {
-            return formatter.format(value, "%spellout-numbering-verbose")
-                    .replace(",", "")
-                    .replace("-", " ")
-                    .replace("minus", "negative");
-
-        } catch (NumberFormatException e) {
-            return String.format("%s is not a valid integer input", value);
-        }
+		ULocale locale = ULocale.forLocale(Locale.US);
+		RuleBasedNumberFormat formatter = new RuleBasedNumberFormat(locale, RuleBasedNumberFormat.SPELLOUT);
+		return formatter.format(value, "%spellout-numbering-verbose").replace(",", "").replace("-", " ")
+				.replace("minus", "negative");
 	}
 
 }
